@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
-import { ArrowDown, ArrowRight, CalendarDays, Check, Clock3, Instagram, MapPin, Menu, Phone, Sparkles, Users, X } from "lucide-react";
+import { ArrowDown, ArrowRight, CalendarDays, Check, Clock3, Instagram, MapPin, Menu, Phone, Sparkles, Users, X, type LucideIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,7 @@ import foodImage from "@/assets/germinnaa-food-table.jpg";
 import dessertImage from "@/assets/germinnaa-dessert-drinks.jpg";
 import logoAsset from "@/assets/germinnaa-logo.png.asset.json";
 
-const mapKey = import.meta.env.VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY;
+const mapKey = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY"];
 const mapAddress = "Germinnaa, P-557 Hemanta Mukhopadhyay Sarani, Kolkata, West Bengal 700029";
 const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress)}`;
 
@@ -39,6 +39,13 @@ const dishes = [
   ["Spiced Mango Slush", "Tropical brightness with a subtle warming finish."],
 ] as const;
 
+const returnReasons: ReadonlyArray<readonly [LucideIcon, string, string]> = [
+  [Sparkles, "Thoughtful Flavours", "Globally inspired dishes crafted with personality."],
+  [CalendarDays, "Beautiful Atmosphere", "A cozy, elegant space designed for conversations and moments."],
+  [Users, "Warm Hospitality", "Friendly service that makes every visit feel personal."],
+  [Clock3, "Something for Every Mood", "From slow coffees to long dinners and everything in between."],
+];
+
 function Logo({ light = false }: { light?: boolean }) {
   return <a href="#home" className="flex shrink-0 items-center gap-3" aria-label="Germinnaa home"><img src={logoAsset.url} alt="" className="size-9 rounded-full" width="36" height="36"/><span className={`text-[13px] font-semibold uppercase tracking-[.26em] ${light ? "text-primary-foreground" : "text-primary"}`}>Germinnaa</span></a>;
 }
@@ -62,10 +69,10 @@ function ReservationDialog({ open, onOpenChange }: { open: boolean; onOpenChange
       {submitted ? <div className="py-10 text-center animate-rise"><span className="mx-auto mb-6 grid size-14 place-items-center rounded-full border border-accent text-accent"><Check/></span><DialogTitle className="text-4xl text-primary">Your table request is ready.</DialogTitle><DialogDescription className="mx-auto mt-4 max-w-sm leading-7">Thank you. This preview does not send bookings yet; Germinnaa can connect it to WhatsApp, email, or a reservation service.</DialogDescription><Button className="mt-8 h-12 bg-primary px-7" onClick={() => onOpenChange(false)}>Done</Button></div> : <>
         <DialogHeader><p className="mb-2 text-xs font-semibold uppercase tracking-[.22em] text-accent">Reserve a moment</p><DialogTitle className="text-4xl text-primary">Your table awaits.</DialogTitle><DialogDescription className="pt-2 leading-6">Share your preferred details and we’ll prepare your reservation request.</DialogDescription></DialogHeader>
         <form className="mt-3 grid gap-5" onSubmit={submit} noValidate>
-          <div><Label htmlFor="name">Name</Label><Input id="name" name="name" autoComplete="name" maxLength={80} className="mt-2 h-12" placeholder="Your name"/><p className="mt-1 text-xs text-destructive">{errors.name}</p></div>
-          <div><Label htmlFor="phone">Phone number</Label><Input id="phone" name="phone" type="tel" autoComplete="tel" maxLength={18} className="mt-2 h-12" placeholder="+91 98765 43210"/><p className="mt-1 text-xs text-destructive">{errors.phone}</p></div>
-          <div className="grid gap-5 sm:grid-cols-2"><div><Label htmlFor="date">Date</Label><Input id="date" name="date" type="date" min={new Date().toISOString().split("T")[0]} className="mt-2 h-12"/><p className="mt-1 text-xs text-destructive">{errors.date}</p></div><div><Label htmlFor="time">Time</Label><Input id="time" name="time" type="time" min="11:00" max="23:00" className="mt-2 h-12"/><p className="mt-1 text-xs text-destructive">{errors.time}</p></div></div>
-          <div><Label>Number of guests</Label><Select value={guests} onValueChange={setGuests}><SelectTrigger className="mt-2 h-12"><SelectValue placeholder="Select party size"/></SelectTrigger><SelectContent>{["1","2","3","4","5","6","7","8+"].map((n) => <SelectItem key={n} value={n}>{n} {n === "1" ? "guest" : "guests"}</SelectItem>)}</SelectContent></Select><p className="mt-1 text-xs text-destructive">{errors.guests}</p></div>
+           <div><Label htmlFor="name">Name</Label><Input id="name" name="name" autoComplete="name" maxLength={80} className="mt-2 h-12" placeholder="Your name"/><p className="mt-1 text-xs text-destructive">{errors["name"]}</p></div>
+           <div><Label htmlFor="phone">Phone number</Label><Input id="phone" name="phone" type="tel" autoComplete="tel" maxLength={18} className="mt-2 h-12" placeholder="+91 98765 43210"/><p className="mt-1 text-xs text-destructive">{errors["phone"]}</p></div>
+           <div className="grid gap-5 sm:grid-cols-2"><div><Label htmlFor="date">Date</Label><Input id="date" name="date" type="date" min={new Date().toISOString().split("T")[0]} className="mt-2 h-12"/><p className="mt-1 text-xs text-destructive">{errors["date"]}</p></div><div><Label htmlFor="time">Time</Label><Input id="time" name="time" type="time" min="11:00" max="23:00" className="mt-2 h-12"/><p className="mt-1 text-xs text-destructive">{errors["time"]}</p></div></div>
+           <div><Label>Number of guests</Label><Select value={guests} onValueChange={setGuests}><SelectTrigger className="mt-2 h-12"><SelectValue placeholder="Select party size"/></SelectTrigger><SelectContent>{["1","2","3","4","5","6","7","8+"].map((n) => <SelectItem key={n} value={n}>{n} {n === "1" ? "guest" : "guests"}</SelectItem>)}</SelectContent></Select><p className="mt-1 text-xs text-destructive">{errors["guests"]}</p></div>
           <Button type="submit" className="mt-2 h-13 bg-primary text-primary-foreground">Request a Table <ArrowRight/></Button>
         </form>
       </>}
@@ -100,7 +107,7 @@ function Index() {
 
     <section className="relative min-h-[70svh] overflow-hidden"><img src={heroImage} alt="Germinnaa dining room glowing in the evening" width="1920" height="1280" loading="lazy" className="absolute inset-0 h-full w-full object-cover"/><div className="absolute inset-0 bg-primary/55"/><div className="relative z-10 flex min-h-[70svh] items-center justify-center px-5 text-center text-primary-foreground"><h2 className="text-5xl leading-none sm:text-8xl">Come Hungry.<br/><em>Leave With a Memory.</em></h2></div></section>
 
-    <section className="bg-secondary px-5 py-24 sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto max-w-[1500px]"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="text-xs uppercase tracking-[.24em] text-accent">Why people come back</p><h2 className="mt-4 text-5xl leading-none text-primary sm:text-6xl">Made for<br/><em>many moods.</em></h2></div><div>{[[Sparkles,"Thoughtful Flavours","Globally inspired dishes crafted with personality."],[CalendarDays,"Beautiful Atmosphere","A cozy, elegant space designed for conversations and moments."],[Users,"Warm Hospitality","Friendly service that makes every visit feel personal."],[Clock3,"Something for Every Mood","From slow coffees to long dinners and everything in between."]].map(([Icon,title,text],i) => <div key={String(title)} className="grid grid-cols-[auto_1fr] gap-5 border-t border-accent/35 py-7 sm:grid-cols-[70px_1fr_1fr] sm:items-center"><span className="font-serif text-xl text-accent">0{i+1}</span><span className="flex items-center gap-4 font-serif text-2xl text-primary"><Icon className="size-5 stroke-1 text-accent"/>{title}</span><p className="col-start-2 text-sm leading-6 text-muted-foreground sm:col-start-3">{text}</p></div>)}</div></div></div></section>
+     <section className="bg-secondary px-5 py-24 sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto max-w-[1500px]"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="text-xs uppercase tracking-[.24em] text-accent">Why people come back</p><h2 className="mt-4 text-5xl leading-none text-primary sm:text-6xl">Made for<br/><em>many moods.</em></h2></div><div>{returnReasons.map(([Icon,title,text],i) => <div key={title} className="grid grid-cols-[auto_1fr] gap-5 border-t border-accent/35 py-7 sm:grid-cols-[70px_1fr_1fr] sm:items-center"><span className="font-serif text-xl text-accent">0{i+1}</span><span className="flex items-center gap-4 font-serif text-2xl text-primary"><Icon className="size-5 stroke-1 text-accent"/>{title}</span><p className="col-start-2 text-sm leading-6 text-muted-foreground sm:col-start-3">{text}</p></div>)}</div></div></div></section>
 
     <section className="bg-primary px-5 py-24 text-primary-foreground sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto max-w-5xl text-center"><p className="text-xs uppercase tracking-[.24em] text-accent">What guests remember</p><h2 className="mt-4 text-5xl sm:text-7xl">Loved Beyond the Table.</h2><blockquote className="mx-auto mt-12 max-w-4xl font-serif text-3xl leading-snug text-primary-foreground/90 sm:text-5xl">“A beautiful balance of cozy ambience, thoughtful food, warm service, and interiors made for lingering.”</blockquote><p className="mt-8 text-xs uppercase tracking-[.18em] text-primary-foreground/50">A reflection of recurring guest sentiment</p></div></section>
 
