@@ -39,6 +39,13 @@ const dishes = [
   ["Spiced Mango Slush", "Tropical brightness with a subtle warming finish."],
 ] as const;
 
+const returnReasons: ReadonlyArray<readonly [LucideIcon, string, string]> = [
+  [Sparkles, "Thoughtful Flavours", "Globally inspired dishes crafted with personality."],
+  [CalendarDays, "Beautiful Atmosphere", "A cozy, elegant space designed for conversations and moments."],
+  [Users, "Warm Hospitality", "Friendly service that makes every visit feel personal."],
+  [Clock3, "Something for Every Mood", "From slow coffees to long dinners and everything in between."],
+];
+
 function Logo({ light = false }: { light?: boolean }) {
   return <a href="#home" className="flex shrink-0 items-center gap-3" aria-label="Germinnaa home"><img src={logoAsset.url} alt="" className="size-9 rounded-full" width="36" height="36"/><span className={`text-[13px] font-semibold uppercase tracking-[.26em] ${light ? "text-primary-foreground" : "text-primary"}`}>Germinnaa</span></a>;
 }
@@ -100,7 +107,7 @@ function Index() {
 
     <section className="relative min-h-[70svh] overflow-hidden"><img src={heroImage} alt="Germinnaa dining room glowing in the evening" width="1920" height="1280" loading="lazy" className="absolute inset-0 h-full w-full object-cover"/><div className="absolute inset-0 bg-primary/55"/><div className="relative z-10 flex min-h-[70svh] items-center justify-center px-5 text-center text-primary-foreground"><h2 className="text-5xl leading-none sm:text-8xl">Come Hungry.<br/><em>Leave With a Memory.</em></h2></div></section>
 
-     <section className="bg-secondary px-5 py-24 sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto max-w-[1500px]"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="text-xs uppercase tracking-[.24em] text-accent">Why people come back</p><h2 className="mt-4 text-5xl leading-none text-primary sm:text-6xl">Made for<br/><em>many moods.</em></h2></div><div>{[[Sparkles,"Thoughtful Flavours","Globally inspired dishes crafted with personality."],[CalendarDays,"Beautiful Atmosphere","A cozy, elegant space designed for conversations and moments."],[Users,"Warm Hospitality","Friendly service that makes every visit feel personal."],[Clock3,"Something for Every Mood","From slow coffees to long dinners and everything in between."]] .map(([Icon,title,text]: readonly [LucideIcon, string, string],i) => <div key={title} className="grid grid-cols-[auto_1fr] gap-5 border-t border-accent/35 py-7 sm:grid-cols-[70px_1fr_1fr] sm:items-center"><span className="font-serif text-xl text-accent">0{i+1}</span><span className="flex items-center gap-4 font-serif text-2xl text-primary"><Icon className="size-5 stroke-1 text-accent"/>{title}</span><p className="col-start-2 text-sm leading-6 text-muted-foreground sm:col-start-3">{text}</p></div>)}</div></div></div></section>
+     <section className="bg-secondary px-5 py-24 sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto max-w-[1500px]"><div className="grid gap-10 lg:grid-cols-[.7fr_1.3fr]"><div><p className="text-xs uppercase tracking-[.24em] text-accent">Why people come back</p><h2 className="mt-4 text-5xl leading-none text-primary sm:text-6xl">Made for<br/><em>many moods.</em></h2></div><div>{returnReasons.map(([Icon,title,text],i) => <div key={title} className="grid grid-cols-[auto_1fr] gap-5 border-t border-accent/35 py-7 sm:grid-cols-[70px_1fr_1fr] sm:items-center"><span className="font-serif text-xl text-accent">0{i+1}</span><span className="flex items-center gap-4 font-serif text-2xl text-primary"><Icon className="size-5 stroke-1 text-accent"/>{title}</span><p className="col-start-2 text-sm leading-6 text-muted-foreground sm:col-start-3">{text}</p></div>)}</div></div></div></section>
 
     <section className="bg-primary px-5 py-24 text-primary-foreground sm:px-8 lg:px-12 lg:py-32"><div className="mx-auto max-w-5xl text-center"><p className="text-xs uppercase tracking-[.24em] text-accent">What guests remember</p><h2 className="mt-4 text-5xl sm:text-7xl">Loved Beyond the Table.</h2><blockquote className="mx-auto mt-12 max-w-4xl font-serif text-3xl leading-snug text-primary-foreground/90 sm:text-5xl">“A beautiful balance of cozy ambience, thoughtful food, warm service, and interiors made for lingering.”</blockquote><p className="mt-8 text-xs uppercase tracking-[.18em] text-primary-foreground/50">A reflection of recurring guest sentiment</p></div></section>
 
