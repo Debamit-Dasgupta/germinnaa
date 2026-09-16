@@ -144,13 +144,37 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.65;
   }
 
   html { scroll-behavior: smooth; }
 
   h1, h2, h3 { font-family: var(--font-serif); }
 
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
   ::selection { background: var(--accent); color: var(--foreground); }
+}
+
+@utility nav-link {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -0.35rem;
+    left: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .4s ease;
+  }
+  &:hover::after { transform: scaleX(1); transform-origin: left; }
 }
 
 @utility grain {
