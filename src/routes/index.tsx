@@ -13,8 +13,6 @@ import greenInteriorAsset from "@/assets/germinnaa-green-interior.png.asset.json
 import coffeeAsset from "@/assets/germinnaa-coffee.png.asset.json";
 import exteriorAsset from "@/assets/germinnaa-exterior.webp.asset.json";
 import archedInteriorAsset from "@/assets/germinnaa-arched-interior.png.asset.json";
-import burgerAsset from "@/assets/germinnaa-burger.png.asset.json";
-import sandwichAsset from "@/assets/germinnaa-sandwich.png.asset.json";
 import pizzaAsset from "@/assets/germinnaa-pizza.png.asset.json";
 import berrySlushAsset from "@/assets/germinnaa-berry-slush.png.asset.json";
 import croissantAsset from "@/assets/germinnaa-croissant.png.asset.json";
@@ -27,8 +25,6 @@ const ambienceImage = greenInteriorAsset.url;
 const foodImage = skewersAsset.url;
 const dessertImage = coffeeAsset.url;
 const exteriorImage = exteriorAsset.url;
-const burgerImage = burgerAsset.url;
-const sandwichImage = sandwichAsset.url;
 const archedInteriorImage = archedInteriorAsset.url;
 const berrySlushImage = berrySlushAsset.url;
 const croissantImage = croissantAsset.url;
