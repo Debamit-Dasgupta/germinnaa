@@ -32,7 +32,6 @@ const snackPlatterImage = snackPlatterAsset.url;
 const nightExteriorImage = nightExteriorAsset.url;
 const stuffedDishImage = stuffedDishAsset.url;
 
-const mapKey = import.meta.env["VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY"];
 const mapAddress = "Germinnaa, P-557 Hemanta Mukhopadhyay Sarani, Kolkata, West Bengal 700029";
 const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress)}`;
 const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapAddress)}&output=embed`;

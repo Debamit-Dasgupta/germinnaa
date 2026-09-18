@@ -5,4 +5,4 @@
 - [x] Remove unsupported testimonial and weaker standalone moods section
 - [x] Verify reservation and menu interactions
 - [x] Review at 1440px, 1280px, 768px, and 390px
-- [ ] Replace the rejected preview map embed with a reliable address map
+- [x] Replace the rejected preview map embed with a reliable address map
