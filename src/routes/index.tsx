@@ -7,30 +7,19 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import logoAsset from "@/assets/germinnaa-logo.png.asset.json";
-import skewersAsset from "@/assets/germinnaa-skewers.png.asset.json";
-import greenInteriorAsset from "@/assets/germinnaa-green-interior.png.asset.json";
-import coffeeAsset from "@/assets/germinnaa-coffee.png.asset.json";
-import exteriorAsset from "@/assets/germinnaa-exterior.webp.asset.json";
-import archedInteriorAsset from "@/assets/germinnaa-arched-interior.png.asset.json";
-import pizzaAsset from "@/assets/germinnaa-pizza.png.asset.json";
-import berrySlushAsset from "@/assets/germinnaa-berry-slush.png.asset.json";
-import croissantAsset from "@/assets/germinnaa-croissant.png.asset.json";
-import snackPlatterAsset from "@/assets/germinnaa-snack-platter.png.asset.json";
-import nightExteriorAsset from "@/assets/germinnaa-night-exterior.png.asset.json";
-import stuffedDishAsset from "@/assets/germinnaa-stuffed-dish.webp.asset.json";
-
-const heroImage = pizzaAsset.url;
-const ambienceImage = greenInteriorAsset.url;
-const foodImage = skewersAsset.url;
-const dessertImage = coffeeAsset.url;
-const exteriorImage = exteriorAsset.url;
-const archedInteriorImage = archedInteriorAsset.url;
-const berrySlushImage = berrySlushAsset.url;
-const croissantImage = croissantAsset.url;
-const snackPlatterImage = snackPlatterAsset.url;
-const nightExteriorImage = nightExteriorAsset.url;
-const stuffedDishImage = stuffedDishAsset.url;
+// Local copies live in public/images/ so the site works on any static host (Vercel, GitHub Pages, etc.)
+const logoImage = "/images/germinnaa-logo.png";
+const heroImage = "/images/germinnaa-pizza.png";
+const ambienceImage = "/images/germinnaa-green-interior.png";
+const foodImage = "/images/germinnaa-skewers.png";
+const dessertImage = "/images/germinnaa-coffee.png";
+const exteriorImage = "/images/germinnaa-exterior.webp";
+const archedInteriorImage = "/images/germinnaa-arched-interior.png";
+const berrySlushImage = "/images/germinnaa-berry-slush.png";
+const croissantImage = "/images/germinnaa-croissant.png";
+const snackPlatterImage = "/images/germinnaa-snack-platter.png";
+const nightExteriorImage = "/images/germinnaa-night-exterior.png";
+const stuffedDishImage = "/images/germinnaa-stuffed-dish.webp";
 
 const mapAddress = "Germinnaa, P-557 Hemanta Mukhopadhyay Sarani, Kolkata, West Bengal 700029";
 const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress)}`;
@@ -59,7 +48,7 @@ const dishes = [
 ] as const;
 
 function Logo({ light = false }: { light?: boolean }) {
-  return <a href="#home" className="flex shrink-0 items-center gap-3" aria-label="Germinnaa home"><img src={logoAsset.url} alt="" className="size-9 rounded-full" width="36" height="36"/><span className={`text-[13px] font-semibold uppercase tracking-[.26em] ${light ? "text-primary-foreground" : "text-primary"}`}>Germinnaa</span></a>;
+  return <a href="#home" className="flex shrink-0 items-center gap-3" aria-label="Germinnaa home"><img src={logoImage} alt="" className="size-9 rounded-full" width="36" height="36"/><span className={`text-[13px] font-semibold uppercase tracking-[.26em] ${light ? "text-primary-foreground" : "text-primary"}`}>Germinnaa</span></a>;
 }
 
 function ReservationDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
